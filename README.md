@@ -34,13 +34,10 @@ https://rawgit.com/farzher/fuzzysort/master/test/test.html
 ## Installation Node
 
 ```sh
-npm i fuzzysort
+npm i fuzzysort-esm
 ```
 ```js
-import fuzzysort from 'fuzzysort'
-```
-```js
-const fuzzysort = require('fuzzysort')
+import fuzzysort from 'fuzzysort-esm'
 ```
 
 
@@ -48,7 +45,7 @@ const fuzzysort = require('fuzzysort')
 ## Installation Browser
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/fuzzysort@3.0.1/fuzzysort.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuzzysort-esm@3.0.1/fuzzysort.min.ejs"></script>
 ```
 
 
@@ -165,60 +162,8 @@ fuzzysort.go('fast',  targets, options)
 
 
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=farzher/fuzzysort)](https://star-history.com/#farzher/fuzzysort)
-
-
-
 ### Changelog
 
-#### v3.0.0
-- Added new behavior when using `keys` and your search contains spaces!
-- Added `options.key` can now be a function `{key: obj => obj.tags.join()}`
-- Removed `fuzzysort.indexes` & Added `result.indexes` (as a getter/setter for GC perf)
-- Removed `fuzzysort.highlight()` & Added `result.highlight()`
-- Changed scoring: score is now a number from 0 to 1 instead of from -Infinity to 0
-- Changed scoring: substring matches are even more relevant
-- Changed scoring: `straw berry` now matches great against `strawberry`
-- Changed scoring: tweaked the scoring quite a bit
-- `result.score` is behind a getter/setter for performance reasons
-- Fixed minor issues
+#### v3.0.1
 
-#### v2.0.0
-- Added new behavior when your search contains spaces!
-- Added fuzzysort.min.js
-- Now depends on ES6 features
-- Removed `result.indexes` & Added `fuzzysort.indexes` (improved GC performance)
-- Completely Removed `options.allowTypo`
-- Completely Removed `fuzzysort.goAsync`
-- Completely Removed `fuzzysort.new`
-- Rewrote the demo
-
-#### v1.9.0
-- Even faster
-- Added `options.all`
-- Deprecated/Removed `options.allowTypo`
-- Deprecated/Removed `fuzzysort.goAsync`
-- Changed scoring: boosted substring matches
-- Changed scoring: targets with too many beginning indexes lose points for being a bad target
-- Changed scoring: penality for not starting near the beginning
-- Changed scoring: penality for more groups
-- Fixed "Exponential backtracking hangs browser"
-
-#### v1.2.0
-- Added `fuzzysort.highlight(result, callback)`
-
-#### v1.1.0
-- Added `allowTypo` as an option
-
-#### v1.0.0
-
-- Inverted scores; they're now negative instead of positive, so that higher scores are better
-- Added ability to search objects by `key`/`keys` with custom weights
-- Removed the option to automatically highlight and exposed `fuzzysort.highlight`
-- Removed all options from `fuzzysort` and moved them into `fuzzysort.go` optional params
-
-#### v0.x.x
-
-- init
+- ESM fork of farzher/fuzzysort

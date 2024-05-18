@@ -1,33 +1,34 @@
 {
-
-  "name"        : "fuzzysort",
-  "version"     : "3.0.1",
-  "author"      : "farzher",
-  "license"     : "MIT",
-  "description" : "Fast SublimeText-like fuzzy search for JavaScript",
-
-  "keywords": ["fuzzy search", "fuzzy", "search", "filter", "javascript", "node", "fast", "sublime"],
-
+  "name": "fuzzysort",
+  "version": "3.0.1",
+  "author": "hlysine",
+  "license": "MIT",
+  "description": "Fast SublimeText-like fuzzy search for JavaScript. ESM fork of farzher/fuzzysort.",
+  "keywords": [
+    "fuzzy search",
+    "fuzzy",
+    "search",
+    "filter",
+    "javascript",
+    "node",
+    "fast",
+    "sublime"
+  ],
   "repository": {
-    "type" : "git",
-    "url"  : "https://github.com/farzher/fuzzysort.git"
+    "type": "git",
+    "url": "https://github.com/hlysine/fuzzysort.git"
   },
-
-  "main": "fuzzysort.js",
-
+  "main": "fuzzysort.ejs",
   "scripts": {
-    "test"     : "node test/test.js",
-    "test-min" : "node test/test.js min",
-
-    "minify"   : "uglifyjs fuzzysort.js -o fuzzysort.min.js -m -c --mangle-props keep_quoted --comments /farzher/"
+    "minify": "uglifyjs fuzzysort.ejs -o fuzzysort.min.ejs -m -c --mangle-props keep_quoted --comments /farzher/"
   },
-
   "files": [
-    "fuzzysort.js",
-    "fuzzysort.min.js",
+    "fuzzysort.ejs",
+    "fuzzysort.min.ejs",
     "index.d.ts"
   ],
-
-  "types": "index.d.ts"
-
+  "types": "index.d.ts",
+  "devDependencies": {
+    "uglify-js": "^3.17.4"
+  }
 }

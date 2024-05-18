@@ -1,11 +1,7 @@
-// https://github.com/farzher/fuzzysort v3.0.1
+// https://github.com/hlysine/fuzzysort v3.0.1
 
-// UMD (Universal Module Definition) for fuzzysort
-;((root, UMD) => {
-  if(typeof define === 'function' && define.amd) define([], UMD)
-  else if(typeof module === 'object' && module.exports) module.exports = UMD()
-  else root['fuzzysort'] = UMD()
-})(this, _ => {
+// ESM for fuzzysort
+const fuzzysort = (_ => {
   'use strict'
 
   var single = (search, target) => {
@@ -682,4 +678,6 @@
 
   // fuzzysort is written this way for minification. all names are mangeled unless quoted
   return {'single':single, 'go':go, 'prepare':prepare, 'cleanup':cleanup}
-}) // UMD
+})() // ESM
+
+export default fuzzysort
