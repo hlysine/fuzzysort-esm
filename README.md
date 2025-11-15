@@ -7,6 +7,10 @@
 </p>
 
 <p align="center">
+  Ported to ESM by <a href="https://github.com/hlysine">hlysine</a>.
+</p>
+
+<p align="center">
   <b>Fast:</b> <b>&lt;1ms</b> to search <b>13,000</b> files.
   <br>
   <b>Tiny:</b> <b>1 file</b>, <b>0 dependencies</b>, <b>5kb</b>.
