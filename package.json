@@ -1,6 +1,6 @@
 {
   "name": "fuzzysort-esm",
-  "version": "3.0.1",
+  "version": "3.1.1",
   "author": "hlysine",
   "license": "MIT",
   "description": "Fast SublimeText-like fuzzy search for JavaScript. ESM fork of farzher/fuzzysort.",

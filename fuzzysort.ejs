@@ -1,4 +1,4 @@
-// https://github.com/hlysine/fuzzysort v3.0.1
+// https://github.com/farzher/fuzzysort v3.1.1
 
 // ESM for fuzzysort
 const fuzzysort = (_ => {
@@ -51,9 +51,6 @@ const fuzzysort = (_ => {
         var result = algorithm(preparedSearch, target)
         if(result === NULL) continue
         if(result._score < threshold) continue
-
-        // // have to clone result so duplicate targets from different obj can each reference the correct obj
-        // push_result(new_result(result.target, {_score:result._score, _indexes:result._indexes, obj}))
 
         result.obj = obj
         push_result(result)
@@ -169,7 +166,8 @@ const fuzzysort = (_ => {
   }
 
 
-  // this is written as 1 function instead of 2 for minification. perf seems fine
+  // this is written as 1 function instead of 2 for minification. perf seems fine ...
+  // except when minified. the perf is very slow
   var highlight = (result, open='<b>', close='</b>') => {
     var callback = typeof open === 'function' ? open : undefined
 
@@ -324,7 +322,7 @@ const fuzzysort = (_ => {
         var target = getValue(obj, options.key)
         if(target == NULL) continue
         if(!isPrepared(target)) target = getPrepared(target)
-        var result = new_result(target.target, {_score: target._score, obj: target.obj})
+        var result = new_result(target.target, {_score: target._score, obj: obj})
         results.push(result); if(results.length >= limit) return results
       }
     } else if(options?.keys) {
@@ -489,8 +487,11 @@ const fuzzysort = (_ => {
     for(var i = 0; i < searchLen; ++i) prepared._indexes[i] = matchesBest[i]
     prepared._indexes.len = searchLen
 
-    // return prepared
-    return new_result(prepared.target, {_score:prepared._score, _indexes:prepared._indexes})
+    const result    = new Result()
+    result.target   = prepared.target
+    result._score   = prepared._score
+    result._indexes = prepared._indexes
+    return result
   }
   var algorithmSpaces = (preparedSearch, target, allowPartialMatch) => {
     var seen_indexes = new Set()
@@ -582,8 +583,11 @@ const fuzzysort = (_ => {
     return result
   }
 
+  // we use this instead of just .normalize('NFD').replace(/[\u0300-\u036f]/g, '') because that screws with japanese characters
+  var remove_accents = (str) => str.replace(/\p{Script=Latin}+/gu, match => match.normalize('NFD')).replace(/[\u0300-\u036f]/g, '')
 
   var prepareLowerInfo = (str) => {
+    str = remove_accents(str)
     var strLen = str.length
     var lower = str.toLowerCase()
     var lowerCodes = [] // new Array(strLen)    sparse array is too slow
@@ -625,6 +629,7 @@ const fuzzysort = (_ => {
     return beginningIndexes
   }
   var prepareNextBeginningIndexes = (target) => {
+    target = remove_accents(target)
     var targetLen = target.length
     var beginningIndexes = prepareBeginningIndexes(target)
     var nextBeginningIndexes = [] // new Array(targetLen)     sparse array is too slow
